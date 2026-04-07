@@ -6,8 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Your Name or Organization",
+  "license": "ISC", // Ensure LICENSE file is present
   "description": "",
   "dependencies": {
     "bcrypt": "^5.1.1",

@@ -12,8 +12,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 const { jsonmiddleware, generateToken } = require("./Routes/jwt.js");
 // Import routes
-const userRoutes = require('./Routes/user.js'); // Assuming you have this route file
-const connRoutes = require('./Routes/conn.js'); // Assuming you have this route file
+console.error('Internal Server Error');
+res.status(500).send('Internal Server Error');
 const router = require('./Routes/routes.js'); // Assuming you have a routes file for all user routes
 const candidateRoutes = require('./Routes/croutes.js');
 // Use routes
