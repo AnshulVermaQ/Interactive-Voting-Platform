@@ -15,7 +15,7 @@ const jsonmiddleware = (req, res, next) => {
     }
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        if (!process.env.JWT_SECRET) throw new Error('JWT_SECRET is not defined'); const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decoded;
         next();
     } catch (err) {
@@ -25,7 +25,7 @@ const jsonmiddleware = (req, res, next) => {
 };
 
 const generateToken = (userData) => {
-    return jwt.sign(userData, process.env.JWT_SECRET, { expiresIn: '5m' }); // 5m means 5 minutes
+    return jwt.sign(userData, process.env.JWT_SECRET, { expiresIn: '15m' }); // 5m means 5 minutes
 };
 
 module.exports = { jsonmiddleware, generateToken };
