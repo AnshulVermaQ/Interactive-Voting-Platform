@@ -17,15 +17,15 @@ const userSchema = mongoose.Schema({
     },
     mobile: {
         type: Number,
+mobile: {
+        type: String,
         required: true
     },
-    aadharCardNumber:{
-        type:Number,
+aadharCardNumber:{
+        type:String,
         required:true,
         unique:true
     },
-    password: {
-        type: String,
         required: true
     },
     role:{
