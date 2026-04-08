@@ -21,8 +21,8 @@ app.use('/user', router);
 app.use("/candidate", candidateRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
+    console.error('Internal Server Error');
+    res.status(500).send('Internal Server Error');
 });
 
 // Start the server
