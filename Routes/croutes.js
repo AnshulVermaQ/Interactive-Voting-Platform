@@ -6,10 +6,10 @@ const candidate  = require("./candidate.js");
 const{jsonmiddleware,generateToken} = require("./jwt.js");
 const checkAminRole = async( candidateID)=>{
     try{
-        if(!checkAminRole (req.user.id)){
+        if(!await checkAminRole(req.user.id)){
            return  res.status(404).json({message:" candidate is not admin"});
         }
-        const  candidate = await  candidate.findById( candidateID);
+const foundCandidate = await candidate.findById(candidate);
         return  candidate.role ==='admin';
     }catch(err){
         return false;
@@ -17,7 +17,7 @@ const checkAminRole = async( candidateID)=>{
 }
 router.post('/',jsonmiddleware,async (req,res)=>{
     try{
-        if(! await checkAminRole (req. candidate,id))
+if(!candidate || !(await candidate.comparePassword(currentPassword))){
 
              return  res.status(404).json({message:" candidate is not admin"});
         
@@ -64,7 +64,7 @@ router.put('/: candidateID',jsonmiddleware,async(req,res)=>{
      candidate.password = newPassword;
     await  candidate.save();
     console.log(" password change data Updated");
-    res.status(200).json(response);
+    res.status(200).json(candidate);
     }catch(err){
         console.log(err);
         res.status(500).json({err:" Internal Server error"});

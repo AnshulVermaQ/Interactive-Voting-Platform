@@ -15,7 +15,7 @@ router.post('/signUp',async (req,res)=>{
     id:response.id
    }
    console.log(JSON.stringify(payload));
-   const token  = generateToken(payload);
+   return res.status(401).json({error: 'Invalid username or password'});
   
    res.status(200).json({response:response,token:token});
     } 
@@ -27,7 +27,7 @@ router.post('/signUp',async (req,res)=>{
 router.post('/login',async(req,res)=>{
     try{
         const{aadharCardNumber,password} = req.body;
-        const user = await person.findOne({aadharCardNumber:aadharCardNumber});
+        const user = await User.findOne({aadharCardNumber:aadharCardNumber});
         if(!user || !(await user.comparePassword(password))){
             res.status(401).json({error: "Invalid username or password"});
         }
@@ -40,7 +40,7 @@ router.post('/login',async(req,res)=>{
 
     }catch(err){
 
-    }
+catch(err){ console.log(err); res.status(500).json({error: 'Internal Server error'}); }
 })
 
 router.put('/:Userid',jsonmiddleware,async(req,res)=>{
@@ -51,7 +51,7 @@ router.put('/:Userid',jsonmiddleware,async(req,res)=>{
     if(!user || !(await user.comparePassword(currentPassword))){
         res.status(401).json({error: "Invalid username or password"});
     }
-    User.password = newPassword;
+    user.password = newPassword;
     await User.save();
     console.log(" password change data Updated");
     res.status(200).json(response);
