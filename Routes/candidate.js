@@ -9,10 +9,10 @@ const candidateSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    age:{
-        type:Number,
-        required:true
-    },
+votedAt:{
+            type:Date,
+            default:Date.now
+        },
     vote:{
         users:{
            type:  mongoose.Schema.Types.ObjectId,
