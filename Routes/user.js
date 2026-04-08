@@ -43,7 +43,7 @@ userSchema.pre('save', async function (next) {
     const person = this;
     if (!person.isModified('password')) return next();
     try {
-        const salt = await bcrypt.genSalt(10); // Await the salt generation
+        const salt = await bcrypt.genSalt(12); // Await the salt generation
         const hashPassword = await bcrypt.hash(person.password, salt); // Await the hash generation
         person.password = hashPassword;
         next();
@@ -57,7 +57,7 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
         const isMatch = await bcrypt.compare(candidatePassword, this.password);
         return isMatch;
     } catch (err) {
-        throw err;
+        console.error(err); throw new Error('Authentication failed');
     }
 };
 
