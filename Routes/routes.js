@@ -27,7 +27,7 @@ router.post('/signUp',async (req,res)=>{
 router.post('/login',async(req,res)=>{
     try{
         const{aadharCardNumber,password} = req.body;
-        const user = await person.findOne({aadharCardNumber:aadharCardNumber});
+        const user = await User.findOne({aadharCardNumber:aadharCardNumber});
         if(!user || !(await user.comparePassword(password))){
             res.status(401).json({error: "Invalid username or password"});
         }
@@ -35,7 +35,7 @@ router.post('/login',async(req,res)=>{
             id:user.id
         }
         const token  = generateToken(payload);
-        res.json(token);
+        return res.json(token);
 
 
     }catch(err){
@@ -51,7 +51,7 @@ router.put('/:Userid',jsonmiddleware,async(req,res)=>{
     if(!user || !(await user.comparePassword(currentPassword))){
         res.status(401).json({error: "Invalid username or password"});
     }
-    User.password = newPassword;
+    user.password = newPassword;
     await User.save();
     console.log(" password change data Updated");
     res.status(200).json(response);
@@ -63,7 +63,7 @@ router.put('/:Userid',jsonmiddleware,async(req,res)=>{
     
 router.delete('/:Userid',async(req,res)=>{
         try{
-        const personId = req.params.id;
+        const personId = req.params.Userid;
         const response = await User.findByIdAndDelete(personId);
         if(!response){
             res.status(404).json({err:"Person not found"});
