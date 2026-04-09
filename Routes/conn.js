@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
-mongoose.connect(process.env.DB_LOCAL,{
+if (!process.env.DB_LOCAL) throw new Error('DB_LOCAL is not set'); mongoose.connect(process.env.DB_LOCAL,{
 
 }).then(()=>{
     console.log("succes s gg");

@@ -21,15 +21,15 @@ const userSchema = mongoose.Schema({
     },
     aadharCardNumber:{
         type:Number,
-        required:true,
-        unique:true
-    },
-    password: {
+mobile: {
         type: String,
         required: true
     },
-    role:{
+aadharCardNumber:{
         type:String,
+        required:true,
+        unique:true
+    },
         enum:['voter','admin'],
         default:'voter'
     },
